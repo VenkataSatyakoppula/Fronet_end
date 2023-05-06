@@ -820,7 +820,18 @@ $( document ).ready(function() {
       }else{
         LoadBooks(false);
       }
-    });``
+    });
+
+    $("body").on('click',"",function () { 
+      var input = $(this).val();
+      if(input != ""){
+        SearchBook(input);
+      }else{
+        LoadBooks(false);
+      }
+    });
+
+
 
     //Click Events End
 
