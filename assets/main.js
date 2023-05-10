@@ -111,7 +111,7 @@ $( document ).ready(function() {
          }
 
           let foot = `<span class="m-1 border-end border-dark border-1 p-1 updatebook" data-id=${book.id} data-bs-target="#EditModal" data-bs-toggle="modal"><i class="fa-solid fa-pen-to-square"></i> Edit</span>
-          <span class="m-1 border-end border-dark border-1" id=${book.id}> <i class="fa-solid fa-lightbulb"></i> Find </span>
+          <span class="m-1 border-end border-dark border-1"  data-id=${book.id} data-bs-target="#FindBookModal" data-bs-toggle="modal">  <i class="fa-solid fa-lightbulb"></i> Find </span>
           <span class="m-1 deletebook" data-bs-target="#deleteModal" data-bs-toggle="modal" data-id=${book.id}> <i class="fa-solid fa-trash-can"  ></i> Delete</span> 
          </div>
          </div>`
@@ -145,7 +145,7 @@ $( document ).ready(function() {
              }
 
               let foot = `<span class="m-1 border-end border-dark border-1 p-1 updatebook" data-id=${book.id} data-bs-target="#EditModal" data-bs-toggle="modal"><i class="fa-solid fa-pen-to-square"></i> Edit</span>
-              <span class="m-1 border-end border-dark border-1" id=${book.id}> <i class="fa-solid fa-lightbulb"></i> Find </span>
+              <span class="m-1 border-end border-dark border-1 findbook" data-id=${book.id} data-bs-target="#FindBookModal" data-bs-toggle="modal"> <i class="fa-solid fa-lightbulb"></i> Find </span>
               <span class="m-1 deletebook" data-bs-target="#deleteModal" data-bs-toggle="modal" data-id=${book.id}> <i class="fa-solid fa-trash-can"  ></i> Delete</span> 
              </div>
             
@@ -169,7 +169,7 @@ $( document ).ready(function() {
                 <span class="border-end border-dark border-0 p-1 addfav" data-fav=${book.isfav} data-id=${book.id}><i class="fa-solid fa-star"  id="star"></i><div class="spinner-grow spinner-grow-sm text-warning d-none" id="starspin" role="status"><span class="sr-only">Loading...</span>
               </div> Favourite</span>
                 <span class="m-1 border-end border-dark border-1 p-1 updatebook" data-id=${book.id} data-bs-target="#EditModal" data-bs-toggle="modal"><i class="fa-solid fa-pen-to-square"></i> Edit</span>
-                <span class="m-1 border-end border-dark border-1" data-id=${book.id}> <i class="fa-solid fa-lightbulb"></i> Find </span>
+                <span class="m-1 border-end border-dark border-1 findbook" data-id=${book.id} data-bs-target="#FindBookModal" data-bs-toggle="modal"> <i class="fa-solid fa-lightbulb"></i> Find </span>
                 <span class="m-1 deletebook" data-bs-target="#deleteModal" data-bs-toggle="modal" data-id=${book.id}> <i class="fa-solid fa-trash-can" ></i> Delete</span> 
                </div>
               
@@ -478,6 +478,36 @@ $( document ).ready(function() {
 
       });
     }
+    //Find Book using PI
+    function LightOn(id){
+      var settings = {
+        "url": `${url}/api/light-on/${id}/`,
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+          "Authorization": `Bearer ${localStorage.getItem("access")}`
+        },
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+      });
+    }
+
+    function LightOff(id){
+      var settings = {
+        "url": `${url}/api/light-off/${id}/`,
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+          "Authorization": `Bearer ${localStorage.getItem("access")}`
+        },
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+      });
+    }
     //refresh token
     function RefreshToken(){
       $.ajax({
@@ -743,7 +773,6 @@ $( document ).ready(function() {
       let id = $(this).attr('data-id');
       $(this).addClass("d-none");
       DeleteBook(id);
-      
     });
 
     $("body").on('click','#deleteAccount',function () { 
@@ -822,7 +851,7 @@ $( document ).ready(function() {
       }
     });
 
-    $("body").on('click',"",function () { 
+    $("body").on('click',".searchbtn",function () { 
       var input = $(this).val();
       if(input != ""){
         SearchBook(input);
@@ -830,6 +859,39 @@ $( document ).ready(function() {
         LoadBooks(false);
       }
     });
+
+
+    $("body").on("click","#bulb-on",function () {
+      let dataid = $(this).attr("data-id"); 
+      localStorage.setItem(`bulb-${dataid}`,false)
+      $(this).addClass("d-none");
+      $("#bulb-off").removeClass("d-none");
+      LightOff(dataid);
+    });
+
+    $("body").on("click","#bulb-off",function () {
+      let dataid = $(this).attr("data-id");
+      localStorage.setItem(`bulb-${dataid}`,true)
+      $(this).addClass("d-none");
+      $("#bulb-on").removeClass("d-none");
+      LightOn(dataid);
+    });
+
+
+    $("body").on('click','.findbook',function () { 
+      let id = $(this).attr("data-id");
+      console.log(localStorage.getItem(`bulb-${id}`))
+      if (localStorage.getItem(`bulb-${id}`) === "true") {
+        $("#bulb-on").removeClass("d-none");
+        $("#bulb-off").addClass("d-none");
+      }else{
+        $("#bulb-on").addClass("d-none");
+        $("#bulb-off").removeClass("d-none");
+      }
+      $("#bulb-on").attr("data-id",id);
+      $("#bulb-off").attr("data-id",id);
+    });
+
 
 
 
