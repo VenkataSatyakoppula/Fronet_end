@@ -109,7 +109,7 @@ include 'include/loginCheck.php';
           </button>
         </div>
         <div class="text-light modal-body">
-          Light Status : <span id="light-status">ON</span>
+          Light Status : <span id="light-status-text">OFF</span>
           <br>
           <br>
           <span class="d-flex justify-content-center">

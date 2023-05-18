@@ -865,6 +865,7 @@ $( document ).ready(function() {
       let dataid = $(this).attr("data-id"); 
       localStorage.setItem(`bulb-${dataid}`,false)
       $(this).addClass("d-none");
+      $("#light-status-text").text("OFF");
       $("#bulb-off").removeClass("d-none");
       LightOff(dataid);
     });
@@ -873,6 +874,7 @@ $( document ).ready(function() {
       let dataid = $(this).attr("data-id");
       localStorage.setItem(`bulb-${dataid}`,true)
       $(this).addClass("d-none");
+      $("#light-status-text").text("ON");
       $("#bulb-on").removeClass("d-none");
       LightOn(dataid);
     });
@@ -883,9 +885,11 @@ $( document ).ready(function() {
       console.log(localStorage.getItem(`bulb-${id}`))
       if (localStorage.getItem(`bulb-${id}`) === "true") {
         $("#bulb-on").removeClass("d-none");
+        $("#light-status-text").text("ON");
         $("#bulb-off").addClass("d-none");
       }else{
         $("#bulb-on").addClass("d-none");
+        $("#light-status-text").text("OFF");
         $("#bulb-off").removeClass("d-none");
       }
       $("#bulb-on").attr("data-id",id);

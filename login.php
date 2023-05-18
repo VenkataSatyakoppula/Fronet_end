@@ -34,7 +34,7 @@ if (isset($_SESSION['user_id'])) {
                 </div>
                 <div class="mb-3 form-check">
                   <input type="checkbox" class="form-check-input " id="remeber">
-                  <label class="form-check-label text-light" for="exampleCheck1">remeber me</label>
+                  <label class="form-check-label text-light" for="exampleCheck1">remember me</label>
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-outline-light " id="submit">Login</button>

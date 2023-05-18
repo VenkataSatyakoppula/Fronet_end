@@ -37,6 +37,7 @@ $page = explode("/",$_SERVER['REQUEST_URI']);
             <title>Activate Account</title>
         <?php } ?>
 
+    <link type="image/png" rel="icon" href="assets/images/icons8-books-16.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -87,7 +88,7 @@ $page = explode("/",$_SERVER['REQUEST_URI']);
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
         <div class="container">
-        <a href="index.php" class="navbar-brand">Book Shelf</a>
+        <a href="index.php" class="navbar-brand"> <img src="assets/images/icons8-books-48.png"> Book Shelf</a>
         <button 
         class="navbar-toggler"
         type="button"
